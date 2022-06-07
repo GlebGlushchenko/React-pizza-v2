@@ -26,4 +26,4 @@
 
 <hr>
 
-### - DEMO: https://glebglushchenko.github.io/React-pizza-v2/
+### - DEMO: https://courageous-crumble-c22969.netlify.app/
