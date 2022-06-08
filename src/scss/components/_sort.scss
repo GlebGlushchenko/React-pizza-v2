@@ -51,3 +51,14 @@
     }
   }
 }
+
+@media(max-width:500px) {
+  .sort__label{
+    flex-wrap: wrap;
+  }
+
+  .sort{
+    font-size: 14px;
+  }
+  
+}
