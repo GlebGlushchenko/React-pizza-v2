@@ -12,6 +12,22 @@
   border: 1px solid transparent;
   @include noselect();
 
+  &__cross{
+  transition: all 1 ease-in-out;
+  -webkit-transition: all 1 ease-in-out;
+  -moz-transition: all 1 ease-in-out;
+  -ms-transition: all 1 ease-in-out;
+  -o-transition: all 1 ease-in-out;
+ }
+  &:active &__cross{
+      
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+}
+  
   &,
   span {
     color: #fff;
@@ -146,17 +162,15 @@
     }
   }
 }
-
-
-@media(max-width:555px){
-  .button--cart span{
+@media (max-width: 555px) {
+  .button--cart span {
     display: none;
   }
-  .button__delimiter{
+  .button__delimiter {
     display: none;
   }
 
-  .button--cart{
+  .button--cart {
     padding: 10px 10px;
     justify-content: center;
   }
