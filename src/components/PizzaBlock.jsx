@@ -71,7 +71,7 @@ export const PizzaBlock = ({ item }) => {
       </div>
 
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price"> {price === 350 ? `от ${price}` : price} ₽</div>
+        <div className="pizza-block__price"> {price} ₽</div>
         <div className="pizza-block__weight">Вес: {weight} гр.</div>
 
         <button onClick={handlerPizzaCount} className="button button--outline button--add">
