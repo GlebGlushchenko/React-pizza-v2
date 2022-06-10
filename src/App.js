@@ -1,8 +1,5 @@
 import React from "react";
-import Categories from "./components/Categories";
 import Header from "./components/Header";
-import PizzaBlock from "./components/PizzaBlock";
-import Sort from "./components/Sort";
 import Footer from "./components/Footer";
 import "./scss/app.scss";
 import Home from "./components/pages/Home";
