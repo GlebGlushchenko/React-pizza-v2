@@ -85,10 +85,10 @@ const App = () => {
         </main>
         <footer className="footer">
           <div className="footer__icon">
-            <a href="#">
+            <a href="https://tick-time.ru/pictures/Google.png">
               <img src="https://tick-time.ru/pictures/Google.png" alt="" />
             </a>
-            <a href="#">
+            <a href="https://tick-time.ru/pictures/App-Store.png">
               <img src="https://tick-time.ru/pictures/App-Store.png" alt="" />
             </a>
           </div>
