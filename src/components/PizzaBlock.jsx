@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const PizzaBlock = ({ item }) => {
   const [pizzaCount, setPizzaCount] = React.useState(null);
@@ -6,12 +6,14 @@ export const PizzaBlock = ({ item }) => {
   const [activeIndexDough, setActiveIndexDough] = React.useState(0);
   const [showDescriptions, setShowDescriptions] = React.useState(false);
   const [price, setPrice] = React.useState(350);
+  const [weight, setWeight] = React.useState(330);
 
   const handlerPizzaCount = () => setPizzaCount((prev) => prev + 1);
 
   const handlerActiveIndexSize = (index, e) => {
     let size = e.target.innerText.slice(0, 2);
     setPrice(item.price[size]);
+    setWeight(item.weight[size]);
 
     setActiveIndexSize(index);
   };
@@ -19,7 +21,7 @@ export const PizzaBlock = ({ item }) => {
   const handlerActiveIndexDough = (index) => setActiveIndexDough(index);
 
   const descriptorCut =
-    item.description.length > 75 ? item.description.slice(0, 75) + '...' : item.description;
+    item.description.length > 70 ? item.description.slice(0, 65) + "..." : item.description;
 
   return (
     <div className="pizza-block">
@@ -43,20 +45,22 @@ export const PizzaBlock = ({ item }) => {
       </div>
       <div className="pizza-block__selector">
         <ul>
-          {item.doughType.map((item, index) => (
-            <li
-              onClick={() => handlerActiveIndexDough(index)}
-              key={index}
-              className={activeIndexDough === index ? 'active' : ''}>
-              {item}
-            </li>
-          ))}
+          {item.types.map((i, index) => {
+            return (
+              <li
+                onClick={() => handlerActiveIndexDough(index)}
+                key={index}
+                className={activeIndexDough === index ? "active" : ""}>
+                {item.doughType[i]}
+              </li>
+            );
+          })}
         </ul>
         <ul>
           {item.sizePizza.map((item, index) => {
             return (
               <li
-                className={activeIndexSize === index ? 'active' : ''}
+                className={activeIndexSize === index ? "active" : ""}
                 onClick={(e) => handlerActiveIndexSize(index, e)}
                 key={index}>
                 {item} см.
@@ -68,6 +72,7 @@ export const PizzaBlock = ({ item }) => {
 
       <div className="pizza-block__bottom">
         <div className="pizza-block__price"> {price === 350 ? `от ${price}` : price} ₽</div>
+        <div className="pizza-block__weight">Вес: {weight} гр.</div>
 
         <button onClick={handlerPizzaCount} className="button button--outline button--add">
           <span>
