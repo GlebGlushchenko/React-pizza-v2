@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "../Header";
+import { Link } from "react-router-dom";
 
 import cartImg from "../../assets/img/empty-cart.png";
 
 export const Cart = () => {
   return (
     <div className="wrapper">
-      <Header />
       <div className="content">
         <div className="container container--cart">
           <div className="cart cart--empty">
@@ -19,9 +18,9 @@ export const Cart = () => {
               Для того, чтобы заказать пиццу, перейди на главную страницу.
             </p>
             <img src={cartImg} alt="Empty cart" />
-            <a href="/" className="button button--black">
+            <Link to="/" className="button button--black">
               <span>Вернуться назад</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -8,10 +8,10 @@ body {
 }
 
 .wrapper {
-  width: calc(100vw - 100px);
+  width: calc(100% - 20px);
   height: 100%;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 10px auto;
   border-radius: 10px;
   max-width: 1400px;
 }
@@ -24,15 +24,33 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    
+    @media (max-width: 1400px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media(max-width:1000px){
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(max-width:650px){
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
   }
 
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media(max-width:1260px){
+      flex-direction: column;
+    }
   }
 }
 
@@ -274,8 +292,9 @@ body {
 
   &--empty {
     margin: 0 auto;
-    width: 560px;
+    width: 100%;
     text-align: center;
+    max-width: 560px;
 
     h2 {
       font-size: 32px;
@@ -296,8 +315,9 @@ body {
 
     img {
       display: block;
-      width: 300px;
+      width: 100%;
       margin: 45px auto 60px;
+      max-width: 300px;
     }
 
     .button--black {

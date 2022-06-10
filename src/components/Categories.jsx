@@ -1,12 +1,11 @@
 import React from "react";
 
-export const Categories = ({ setCategory }) => {
+export const Categories = () => {
   const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   const handlerActiveIndex = (index) => {
     setActiveIndex(index);
-    setCategory(index);
   };
   return (
     <div className="categories">
