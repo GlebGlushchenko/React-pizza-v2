@@ -99,9 +99,7 @@ const App = () => {
             и это занимает всего 10 минут!
           </p>
           <div className="github">
-            <a target="_blank" href="https://github.com/GlebGlushchenko">
-              github.com
-            </a>
+            <a href="https://github.com/GlebGlushchenko">github.com</a>
           </div>
         </footer>
       </div>
