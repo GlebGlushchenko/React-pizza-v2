@@ -5,10 +5,16 @@ export const PizzaBlock = ({ item }) => {
   const [activeIndexSize, setActiveIndexSize] = React.useState(0);
   const [activeIndexDough, setActiveIndexDough] = React.useState(0);
   const [showDescriptions, setShowDescriptions] = React.useState(false);
+  const [price, setPrice] = React.useState(350);
 
   const handlerPizzaCount = () => setPizzaCount((prev) => prev + 1);
 
-  const handlerActiveIndexSize = (index) => setActiveIndexSize(index);
+  const handlerActiveIndexSize = (index, e) => {
+    let size = e.target.innerText.slice(0, 2);
+    setPrice(item.price[size]);
+
+    setActiveIndexSize(index);
+  };
 
   const handlerActiveIndexDough = (index) => setActiveIndexDough(index);
 
@@ -51,7 +57,7 @@ export const PizzaBlock = ({ item }) => {
             return (
               <li
                 className={activeIndexSize === index ? 'active' : ''}
-                onClick={() => handlerActiveIndexSize(index)}
+                onClick={(e) => handlerActiveIndexSize(index, e)}
                 key={index}>
                 {item} см.
               </li>
@@ -61,22 +67,16 @@ export const PizzaBlock = ({ item }) => {
       </div>
 
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {item.price} ₽</div>
+        <div className="pizza-block__price"> {price === 350 ? `от ${price}` : price} ₽</div>
 
         <button onClick={handlerPizzaCount} className="button button--outline button--add">
-          <svg
-            className="button__cross"
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10.8 4.8H7.2V1.2C7.2 0.5373 6.6627 0 6 0C5.3373 0 4.8 0.5373 4.8 1.2V4.8H1.2C0.5373 4.8 0 5.3373 0 6C0 6.6627 0.5373 7.2 1.2 7.2H4.8V10.8C4.8 11.4627 5.3373 12 6 12C6.6627 12 7.2 11.4627 7.2 10.8V7.2H10.8C11.4627 7.2 12 6.6627 12 6C12 5.3373 11.4627 4.8 10.8 4.8Z"
-              fill="white"
-            />
-          </svg>
-          <span>Добавить</span>
+          <span>
+            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921z" />
+              <circle cx="10.5" cy="19.5" r="1.5" fill="" />
+              <circle cx="17.5" cy="19.5" r="1.5" fill="" />
+            </svg>
+          </span>
           {pizzaCount && <i>{pizzaCount}</i>}
         </button>
       </div>

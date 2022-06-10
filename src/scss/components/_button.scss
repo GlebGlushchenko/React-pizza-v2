@@ -11,22 +11,14 @@
   transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
+  
+  &:hover{
+      circle{
+        fill:wheat;
+      }
+    }
 
-  &__cross{
-  transition: all 1 ease-in-out;
-  -webkit-transition: all 1 ease-in-out;
-  -moz-transition: all 1 ease-in-out;
-  -ms-transition: all 1 ease-in-out;
-  -o-transition: all 1 ease-in-out;
- }
-  &:active &__cross{
-      
-      transform: rotate(180deg);
-      -webkit-transform: rotate(180deg);
-      -moz-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      -o-transform: rotate(180deg);
-}
+  
   
   &,
   span {
@@ -37,6 +29,10 @@
   span,
   path,
   svg {
+    circle{
+      transition: all $duration ease-in-out;
+    }
+
     transition: all $duration ease-in-out;
   }
 
@@ -81,6 +77,7 @@
       path {
         fill: $orange;
       }
+      
     }
 
     &:hover {
@@ -119,6 +116,8 @@
     span {
       font-weight: 600;
       font-size: 16px;
+      position: relative;
+      top: 3px;
     }
 
     &:hover {
