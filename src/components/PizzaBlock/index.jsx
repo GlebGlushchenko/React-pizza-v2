@@ -5,14 +5,13 @@ export const PizzaBlock = ({ item }) => {
   const [activeIndexSize, setActiveIndexSize] = React.useState(0);
   const [activeIndexDough, setActiveIndexDough] = React.useState(0);
   const [showDescriptions, setShowDescriptions] = React.useState(false);
-  const [price, setPrice] = React.useState(350);
+  const [price, setPrice] = React.useState(item.price);
   const [weight, setWeight] = React.useState(330);
-
   const handlerPizzaCount = () => setPizzaCount((prev) => prev + 1);
 
   const handlerActiveIndexSize = (index, e) => {
     let size = e.target.innerText.slice(0, 2);
-    setPrice(item.price[size]);
+    // setPrice(item.price[size]);
     setWeight(item.weight[size]);
 
     setActiveIndexSize(index);
