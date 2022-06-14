@@ -11,7 +11,6 @@ export const PizzaBlock = ({ item }) => {
 
   const handlerActiveIndexSize = (index, e) => {
     let size = e.target.innerText.slice(0, 2);
-    // setPrice(item.price[size]);
     setWeight(item.weight[size]);
 
     setActiveIndexSize(index);
