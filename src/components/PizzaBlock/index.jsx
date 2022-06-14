@@ -5,7 +5,6 @@ export const PizzaBlock = ({ item }) => {
   const [activeIndexSize, setActiveIndexSize] = React.useState(0);
   const [activeIndexDough, setActiveIndexDough] = React.useState(0);
   const [showDescriptions, setShowDescriptions] = React.useState(false);
-  const [price, setPrice] = React.useState(item.price);
   const [weight, setWeight] = React.useState(330);
   const handlerPizzaCount = () => setPizzaCount((prev) => prev + 1);
 
@@ -70,7 +69,7 @@ export const PizzaBlock = ({ item }) => {
         </div>
 
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price"> {price} ₽</div>
+          <div className="pizza-block__price"> {item.price} ₽</div>
           <div className="pizza-block__weight">Вес: {weight} гр.</div>
 
           <button onClick={handlerPizzaCount} className="button button--outline button--add">
