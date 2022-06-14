@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Categories = ({ selectedCategories, handlerSelectedCategories }) => {
+export const Categories = ({ selectedCategories, setSelectedCategories }) => {
   const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 
   return (
@@ -8,7 +8,7 @@ export const Categories = ({ selectedCategories, handlerSelectedCategories }) =>
       <ul>
         {categories.map((i, index) => (
           <li
-            onClick={() => handlerSelectedCategories(index)}
+            onClick={() => setSelectedCategories(index)}
             className={selectedCategories === index ? "active" : ""}
             key={index}>
             {i}
