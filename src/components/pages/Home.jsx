@@ -26,7 +26,7 @@ export const Home = ({ searchValue }) => {
       });
 
     window.scrollTo(0, 0);
-  }, [selectedCategories, sortType, searchValue]);
+  }, [selectedCategories, sortType, searchValue, sort, order, categories, search]);
 
   const skeleton = [...new Array(pizzas.length)].map((item, index) => <Skeliton key={index} />); //Render skeleton
   const items = pizzas.map((item) => <PizzaBlock item={item} key={item.id} />); //Render pizzas
