@@ -1,12 +1,14 @@
 import React from "react";
+
+import { Route, Routes } from "react-router-dom";
+
+import "./scss/app.scss";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import "./scss/app.scss";
-import Home from "./components/pages/Home";
-import Cart from "./components/pages/Cart";
-import { Route, Routes } from "react-router-dom";
-import NotFound from "./components/pages/NotFound";
-import Modal from "./components/ModalWindow";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import NotFound from "./components/NotFoundBlock";
 
 export const SearchContex = React.createContext();
 
@@ -15,7 +17,6 @@ const App = () => {
 
   return (
     <>
-      {/* <Modal /> */}
       <div className={"wrapper"}>
         <SearchContex.Provider value={{ searchValue, setSearchValue }}>
           <Header />

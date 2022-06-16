@@ -1,9 +1,34 @@
 import React from "react";
-import { SearchContex } from "../../App";
 import styles from "./Search.module.scss";
+import { useSelector, useDispatch } from "react-redux";
+import debounce from "lodash.debounce";
+
+import { setSearchValue } from "../../redux/slices/searchSlice";
 
 export const Search = () => {
-  const { searchValue, setSearchValue } = React.useContext(SearchContex);
+  const [inputValue, setInputValue] = React.useState("");
+  const dispatch = useDispatch();
+  const searchValue = useSelector((state) => state.search.searchValue);
+  const input = React.useRef();
+
+  const hanlderUpdateSearchValue = React.useCallback(
+    debounce((e) => {
+      dispatch(setSearchValue(e));
+    }, 250),
+    [],
+  );
+
+  const handlerChangeInput = (e) => {
+    setInputValue(e);
+    hanlderUpdateSearchValue(e);
+  };
+
+  const handlerClearInput = () => {
+    setInputValue("");
+    dispatch(setSearchValue(""));
+    input.current.focus();
+  };
+
   return (
     <div className={styles.root}>
       <svg
@@ -40,18 +65,17 @@ export const Search = () => {
         />
       </svg>
       <input
-        value={searchValue}
+        ref={input}
+        value={inputValue}
         onChange={(e) => {
-          setSearchValue(e.target.value);
+          handlerChangeInput(e.target.value);
         }}
         type="text"
         placeholder="Поиск пицц"
       />
       {searchValue && (
         <svg
-          onClick={() => {
-            setSearchValue("");
-          }}
+          onClick={handlerClearInput}
           className={styles.closeIcon}
           version="1.1"
           viewBox="0 0 24 24"
