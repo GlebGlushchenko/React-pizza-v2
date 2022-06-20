@@ -75,7 +75,6 @@ export const Home = () => {
 
   React.useEffect(() => {
     if (isMounted.current) {
-      console.log("Mount");
       const queryString = qs.stringify({
         sortType: sortType.sortProperty,
         selectedCategorie,

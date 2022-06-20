@@ -14,6 +14,7 @@ export const listCategories = [
 export const Sort = ({ sortType }) => {
   const dispatch = useDispatch();
 
+  const sortRef = React.useRef();
   const [showPopUp, setShowPopUp] = React.useState(false); //Show Pop Up
 
   const sortLabel = sortType.sortProperty.includes("-");
@@ -22,13 +23,25 @@ export const Sort = ({ sortType }) => {
     dispatch(setSortType(obj));
     setShowPopUp(false);
   };
+  React.useEffect(() => {
+    const handlerOutsideClick = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setShowPopUp(false);
+      }
+    };
+
+    document.body.addEventListener("click", handlerOutsideClick);
+    return () => {
+      document.body.removeEventListener("click", handlerOutsideClick);
+    };
+  }, []);
 
   return (
-    <div className="sort">
+    <div onClick={() => setShowPopUp(!showPopUp)} ref={sortRef} className="sort">
       <div className="sort__label">
         {sortLabel ? "⬆" : "⬇"}
         <b>Сортировка по:</b>
-        <span onClick={() => setShowPopUp(!showPopUp)}>{sortType.name}</span>
+        <span>{sortType.name}</span>
       </div>
       {showPopUp && (
         <div className="sort__popup">
