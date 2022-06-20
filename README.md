@@ -28,3 +28,4 @@
 
 ### - DEMO: https://react-pizza-v2.netlify.app/
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d8cccc0e-de29-4b45-80d3-18f4439a1329/deploy-status)](https://app.netlify.com/sites/react-pizza-v2/deploys)
+### - Vercel: https://react-pizza-v2-seven.vercel.app/
