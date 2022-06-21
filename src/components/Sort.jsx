@@ -3,12 +3,9 @@ import { useDispatch } from "react-redux";
 import { setSortType } from "../redux/slices/filterSlice";
 
 export const listCategories = [
-  { name: "популярности⬇", sortProperty: "rating" },
-  { name: "популярности⬆", sortProperty: "-rating" },
-  { name: "цене⬇", sortProperty: "price" },
-  { name: "цене⬆", sortProperty: "-price" },
-  { name: "алфавиту⬇", sortProperty: "title" },
-  { name: "алфавиту⬆", sortProperty: "-title" },
+  { name: "популярности", sortProperty: "rating" },
+  { name: " ценапо возрастанию", sortProperty: "-price" },
+  { name: "цена по убыванию", sortProperty: "price" },
 ];
 
 export const Sort = ({ sortType }) => {
@@ -39,8 +36,6 @@ export const Sort = ({ sortType }) => {
   return (
     <div onClick={() => setShowPopUp(!showPopUp)} ref={sortRef} className="sort">
       <div className="sort__label">
-        {sortLabel ? "⬆" : "⬇"}
-        <b>Сортировка по:</b>
         <span>{sortType.name}</span>
       </div>
       {showPopUp && (
