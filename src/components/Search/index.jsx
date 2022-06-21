@@ -15,7 +15,7 @@ export const Search = () => {
     debounce((e) => {
       dispatch(setSearchValue(e));
     }, 250),
-    [],
+    [searchValue],
   );
 
   const handlerChangeInput = (e) => {

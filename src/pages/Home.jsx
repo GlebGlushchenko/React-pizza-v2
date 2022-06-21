@@ -86,7 +86,7 @@ export const Home = () => {
   }, [selectedCategorie, sortType, searchValue, pageCount]);
 
   const skeleton = [...new Array(pizzas.length)].map((item, index) => <Skeliton key={index} />); //Render skeleton
-  const items = pizzas.map((item) => <PizzaBlock item={item} key={item.id} />); //Render pizzas
+  const items = pizzas.map((item) => <PizzaBlock {...item} key={item.id} />); //Render pizzas
 
   return (
     <>

@@ -1,29 +1,55 @@
 import React from "react";
 
-export const PizzaBlock = ({ item }) => {
-  const [pizzaCount, setPizzaCount] = React.useState(null);
-  const [activeIndexSize, setActiveIndexSize] = React.useState(0);
-  const [activeIndexDough, setActiveIndexDough] = React.useState(0);
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { plusProduct } from "../../redux/slices/cartSlice";
+
+export const PizzaBlock = ({
+  vegan,
+  description,
+  weight,
+  imgUrl,
+  title,
+  types,
+  doughType,
+  sizePizza,
+  price,
+  id,
+}) => {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+  const count = cartItem ? cartItem.count : 0;
+  const [activeSize, setActiveSize] = React.useState(0);
+  const [activeType, setActiveType] = React.useState(0);
   const [showDescriptions, setShowDescriptions] = React.useState(false);
-  const [weight, setWeight] = React.useState(330);
-  const handlerPizzaCount = () => setPizzaCount((prev) => prev + 1);
+  const [weights, setWeight] = React.useState(330);
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imgUrl,
+      type: doughType[activeType],
+      size: sizePizza[activeSize],
+    };
+    dispatch(plusProduct(item));
+  };
 
   const handlerActiveIndexSize = (index, e) => {
     let size = e.target.innerText.slice(0, 2);
-    setWeight(item.weight[size]);
+    setWeight(weight[size]);
 
-    setActiveIndexSize(index);
+    setActiveSize(index);
   };
 
-  const handlerActiveIndexDough = (index) => setActiveIndexDough(index);
+  const handlerActiveIndexDough = (index) => setActiveType(index);
 
-  const descriptorCut =
-    item.description.length > 70 ? item.description.slice(0, 65) + "..." : item.description;
+  const descriptorCut = description.length > 70 ? description.slice(0, 65) + "..." : description;
 
   return (
     <div className="pizza-block__wrapper">
       <div className="pizza-block">
-        {item.vegan && (
+        {vegan && (
           <span className="pizza-block__veganIcon">
             <img
               src="https://tick-time.ru/images/filters/4b8e14c0-3933-485a-85e4-e971c44c99f9.png"
@@ -36,29 +62,29 @@ export const PizzaBlock = ({ item }) => {
           </span>
         )}
 
-        <img className="pizza-block__image" src={item.imgUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{item.title}</h4>
+        <img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+        <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__disc" onClick={() => setShowDescriptions(!showDescriptions)}>
-          {!showDescriptions ? descriptorCut : item.description}
+          {!showDescriptions ? descriptorCut : description}
         </div>
         <div className="pizza-block__selector">
           <ul>
-            {item.types.map((i, index) => {
+            {types.map((i, index) => {
               return (
                 <li
                   onClick={() => handlerActiveIndexDough(index)}
                   key={index}
-                  className={activeIndexDough === index ? "active" : ""}>
-                  {item.doughType[i]}
+                  className={activeType === index ? "active" : ""}>
+                  {doughType[i]}
                 </li>
               );
             })}
           </ul>
           <ul>
-            {item.sizePizza.map((item, index) => {
+            {sizePizza.map((item, index) => {
               return (
                 <li
-                  className={activeIndexSize === index ? "active" : ""}
+                  className={activeSize === index ? "active" : ""}
                   onClick={(e) => handlerActiveIndexSize(index, e)}
                   key={index}>
                   {item} см.
@@ -69,10 +95,10 @@ export const PizzaBlock = ({ item }) => {
         </div>
 
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price"> {item.price} ₽</div>
-          <div className="pizza-block__weight">Вес: {weight} гр.</div>
+          <div className="pizza-block__price"> {price} ₽</div>
+          <div className="pizza-block__weight">Вес: {weights} гр.</div>
 
-          <button onClick={handlerPizzaCount} className="button button--outline button--add">
+          <button onClick={onClickAdd} className="button button--outline button--add">
             <span>
               <svg
                 width="24px"
@@ -84,7 +110,7 @@ export const PizzaBlock = ({ item }) => {
                 <circle cx="17.5" cy="19.5" r="1.5" fill="" />
               </svg>
             </span>
-            {pizzaCount && <i>{pizzaCount}</i>}
+            {count > 0 && <i>{count}</i>}
           </button>
         </div>
       </div>
