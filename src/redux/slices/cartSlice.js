@@ -28,9 +28,14 @@ export const cartSlice = createSlice({
       const finditem = state.items.find((obj) => obj.id === action.payload.id);
       if (finditem) {
         finditem.count--;
-      } else {
-        state.items.filter((item) => item.id !== action.payload.id);
       }
+      if (finditem.count === 0) {
+        state.items = state.items.filter((item) => item.id !== action.payload.id);
+      }
+
+      state.totalPrice = state.items.reduce((sum, obj) => {
+        return sum - obj.price;
+      }, state.totalPrice);
     },
 
     removeProduct(state, action) {
