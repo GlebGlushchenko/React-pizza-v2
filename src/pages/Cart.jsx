@@ -2,16 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import CartItem from "../components/CartItem";
 import { clearCart } from "../redux/slices/cartSlice";
+
+import CartItem from "../components/CartItem";
+import CartEmpty from "./CartEmpty";
 
 export const Cart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
+
+  const { items, totalPrice } = useSelector((state) => state.cart);
+
   const totalCount = items.reduce((sum, item) => {
     return sum + item.count;
   }, 0);
+
+  if (totalCount === 0) {
+    return <CartEmpty />;
+  }
+
+  const handlerClearCart = () => dispatch(clearCart());
 
   return (
     <div className="wrapper">
@@ -87,7 +96,7 @@ export const Cart = () => {
                   />
                 </svg>
 
-                <span onClick={() => dispatch(clearCart())}>Очистить корзину</span>
+                <span onClick={handlerClearCart}>Очистить корзину</span>
               </div>
             </div>
             <div className="cart__content-items">
@@ -105,7 +114,7 @@ export const Cart = () => {
                 </span>
               </div>
               <div className="cart__bottom-buttons">
-                <a href="/" className="button button--outline button--add go-back-btn">
+                <Link to="/" className="button button--outline button--add go-back-btn">
                   <svg
                     width="8"
                     height="14"
@@ -120,9 +129,8 @@ export const Cart = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-
-                  <Link to={"/"}>Вернуться назад</Link>
-                </a>
+                  <p>Вернуться назад</p>
+                </Link>
                 <div className="button pay-btn">
                   <span>Оплатить сейчас</span>
                 </div>

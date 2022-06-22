@@ -5,13 +5,17 @@ import { plusProduct, removeProduct, minusProduct } from "../redux/slices/cartSl
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  const onClickPlus = () => {
+
+  const handlerPlusItem = () => {
     dispatch(
       plusProduct({
         id: item.id,
       }),
     );
   };
+  const handlerMinusItem = () => dispatch(minusProduct(item));
+
+  const handlerRemoveItem = () => dispatch(removeProduct(item));
 
   return (
     <div className="cart__item">
@@ -20,11 +24,13 @@ const CartItem = ({ item }) => {
       </div>
       <div className="cart__item-info">
         <h3>{item.title}</h3>
-        <p>тонкое тесто, 26 см.</p>
+        <p>
+          {item.type} тесто, {item.size} см.
+        </p>
       </div>
       <div className="cart__item-count">
         <div
-          onClick={() => dispatch(minusProduct(item))}
+          onClick={handlerMinusItem}
           className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
@@ -44,7 +50,7 @@ const CartItem = ({ item }) => {
         </div>
         <b>{item.count}</b>
         <div
-          onClick={() => onClickPlus()}
+          onClick={handlerPlusItem}
           className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
@@ -67,9 +73,7 @@ const CartItem = ({ item }) => {
         <b>{item.price * item.count} ₽</b>
       </div>
       <div className="cart__item-remove">
-        <div
-          onClick={() => dispatch(removeProduct(item))}
-          className="button button--outline button--circle">
+        <div onClick={handlerRemoveItem} className="button button--outline button--circle">
           <svg
             width="10"
             height="10"
