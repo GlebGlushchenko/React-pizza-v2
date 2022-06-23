@@ -13,6 +13,8 @@ import Paginate from "../components/Paginate";
 import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
 import { listCategories } from "../components/Sort";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
+import { selectSearchValue } from "../redux/slices/searchSlice";
+import { urlString } from "../helpers/urlStringHelper";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -21,19 +23,16 @@ export const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { sortType, pageCount } = useSelector((state) => state.filter);
-  const searchValue = useSelector((state) => state.search.searchValue);
+  const { sortType, pageCount, categoryesId } = useSelector((state) => state.filter);
+  const searchValue = useSelector(selectSearchValue);
 
   const { pizzas, status } = useSelector((state) => state.pizza); //Pizza
 
-  const selectedCategorie = useSelector((state) => state.filter.categoryesId); // Filter
-  const handlerSelectCategory = (index) => dispatch(setCategoryId(index)); //Filter
-
   const getPizzas = async () => {
-    const search = searchValue ? `&title=${searchValue}` : ""; // Search
-    const sort = `&sortBy=${sortType.sortProperty.replace("-", "")}`; // Sort
-    const order = `&order=${sortType.sortProperty.includes("-") ? "asc" : "desc"}`; // Order
-    const categories = selectedCategorie > 0 ? `category=${selectedCategorie}` : ""; // Filter
+    const search = urlString.search(searchValue);
+    const sort = urlString.sort(sortType);
+    const order = urlString.order(sortType);
+    const categories = urlString.categories(categoryesId);
 
     dispatch(fetchPizzas({ pageCount, categories, sort, order, search }));
   };
@@ -59,19 +58,19 @@ export const Home = () => {
     }
     isSearch.current = false;
     window.scrollTo(0, 0);
-  }, [selectedCategorie, sortType, searchValue, pageCount]);
+  }, [categoryesId, sortType, searchValue, pageCount]);
 
   React.useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
         sortType: sortType.sortProperty,
-        selectedCategorie,
+        categoryesId,
         pageCount,
       });
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [selectedCategorie, sortType, searchValue, pageCount]);
+  }, [categoryesId, sortType, searchValue, pageCount]);
 
   const skeleton = [...new Array(8)].map((item, index) => <Skeliton key={index} />); //Render skeleton
   const items = pizzas.map((item) => <PizzaBlock {...item} key={item.id} />); //Render pizzas
@@ -79,7 +78,7 @@ export const Home = () => {
   return (
     <>
       <div className="content__top">
-        <Categories id={selectedCategorie} handlerSelectCategory={handlerSelectCategory} />
+        <Categories />
         <Sort sortType={sortType} />
       </div>
       <h2 className="content__title">Все пиццы</h2>

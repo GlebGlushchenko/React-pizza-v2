@@ -1,7 +1,14 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
-export const Categories = ({ id, handlerSelectCategory }) => {
-  const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
+export const Categories = () => {
+  const { categories, categoryesId } = useSelector((state) => state.filter);
+  console.log(categoryesId);
+  const dispatch = useDispatch();
+  const handlerSelectCategory = (index) => {
+    dispatch(setCategoryId(index));
+  };
 
   return (
     <div className="categories">
@@ -9,9 +16,10 @@ export const Categories = ({ id, handlerSelectCategory }) => {
         {categories.map((item, index) => (
           <li
             onClick={() => handlerSelectCategory(index)}
-            className={id === index ? "active" : ""}
+            className={categoryesId === index ? "active" : ""}
             key={index}>
             {item}
+            {console.log(index)}
           </li>
         ))}
       </ul>

@@ -4,6 +4,7 @@ const initialState = {
   pageCount: 1,
   categoryesId: 0,
   sortType: { name: "популярности⬇", sortProperty: "rating" },
+  categories: ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"],
 };
 
 export const filterSlice = createSlice({
@@ -11,13 +12,14 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     setCategoryId(state, action) {
-      state.categoryesId = action.payload;
+      state.categoryesId = Number(action.payload);
     },
     setSortType(state, action) {
       state.sortType = action.payload;
     },
     setFilters(state, action) {
-      state.categoryesId = Number(action.payload.selectedCategorie);
+      console.log(action.payload);
+      state.categoryesId = Number(action.payload.categoryesId);
       state.sortType = action.payload.sort;
     },
     setPageCount(state, action) {
