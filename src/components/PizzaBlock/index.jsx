@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux/es/exports";
+import { Link } from "react-router-dom";
 import { plusProduct, selectCartItem } from "../../redux/slices/cartSlice";
 
 export const PizzaBlock = ({
@@ -61,8 +62,10 @@ export const PizzaBlock = ({
             />
           </span>
         )}
+        <Link to={"pizza/" + id}>
+          <img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+        </Link>
 
-        <img className="pizza-block__image" src={imgUrl} alt="Pizza" />
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__disc" onClick={() => setShowDescriptions(!showDescriptions)}>
           {!showDescriptions ? descriptorCut : description}
