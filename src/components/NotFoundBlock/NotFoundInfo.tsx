@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./notFoundInfo.module.scss";
 
-export const NotFoundInfo = () => {
+export const NotFoundInfo:React.FC = () => {
   return (
     <div className={styles.title}>
       <h1>Нечего не найдено 😕</h1>

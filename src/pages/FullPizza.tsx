@@ -1,12 +1,14 @@
+
+// @ts-nocheck
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchFullPizza } from "../redux/slices/pizzaSlice";
 
-export const FullPizza = () => {
-  const dispatch = useDispatch();
-  const pizza = useSelector((state) => state.pizza.fullpizza);
-  const { id } = useParams();
+export const FullPizza: React.FC = () => {
+  const dispatch = useDispatch<any>();
+  const pizza:{title:string, description:string, imgUrl:string} = useSelector((state:any) => state.pizza.fullpizza);
+  const {id} = useParams();
 
   React.useEffect(() => {
     dispatch(fetchFullPizza(id));

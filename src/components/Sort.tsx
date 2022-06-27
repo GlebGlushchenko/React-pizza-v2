@@ -2,26 +2,37 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSortType } from "../redux/slices/filterSlice";
 
-export const listCategories = [
+type CategoriesType ={ 
+  name:string;
+  sortProperty:string;
+}
+
+type Props = { 
+  sortType:{
+    name:string;
+    sortProperty:string
+  }
+ 
+}
+
+export const listCategories:CategoriesType[] = [
   { name: "популярности", sortProperty: "rating" },
   { name: " ценапо возрастанию", sortProperty: "-price" },
   { name: "цена по убыванию", sortProperty: "price" },
 ];
 
-export const Sort = ({ sortType }) => {
+export const Sort:React.FC<Props> =({ sortType }) => {
   const dispatch = useDispatch();
 
-  const sortRef = React.useRef();
-  const [showPopUp, setShowPopUp] = React.useState(false); //Show Pop Up
+  const sortRef = React.useRef<HTMLDivElement>(null);
+  const [showPopUp, setShowPopUp] = React.useState<boolean>(false); //Show Pop Up
 
-  const sortLabel = sortType.sortProperty.includes("-");
-
-  const handlerSortType = (obj) => {
+  const handlerSortType = (obj:CategoriesType) => {
     dispatch(setSortType(obj));
     setShowPopUp(false);
   };
   React.useEffect(() => {
-    const handlerOutsideClick = (event) => {
+    const handlerOutsideClick = (event:any) => {
       if (!event.path.includes(sortRef.current)) {
         setShowPopUp(false);
       }
