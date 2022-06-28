@@ -45,6 +45,7 @@ export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
       imgUrl,
       type: doughType[activeType],
       size: sizePizza[activeSize],
+      count: 0,
     };
     dispatch(plusProduct(item));
   };

@@ -19,13 +19,9 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
   const dispatch = useDispatch();
 
   const handlerPlusItem = () => {
-    dispatch(
-      plusProduct({
-        id: item.id,
-      }),
-    );
+    dispatch(plusProduct(item));
   };
-  const handlerMinusItem = () => dispatch(minusProduct(item));
+  const handlerMinusItem = () => dispatch(minusProduct(item.id));
 
   const handlerRemoveItem = () => dispatch(removeProduct(item));
 
@@ -41,9 +37,12 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
+          disabled={item.count === 1}
           onClick={handlerMinusItem}
-          className="button button--outline button--circle cart__item-count-minus">
+          className={`button button--outline button--circle cart__item-count-minus ${
+            item.count === 1 ? "disabled" : ""
+          }`}>
           <svg
             width="10"
             height="10"
@@ -59,7 +58,7 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
         <b>{item.count}</b>
         <div
           onClick={handlerPlusItem}

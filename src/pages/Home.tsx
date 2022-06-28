@@ -11,11 +11,16 @@ import PizzaBlock, { PizzaBlockTypes } from "../components/PizzaBlock";
 import Sort from "../components/Sort";
 import Paginate from "../components/Paginate";
 import { setFilters } from "../redux/slices/filterSlice";
-import { listCategories } from "../components/Sort";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
 import { selectSearchValue } from "../redux/slices/searchSlice";
 import { urlString } from "../helpers/urlStringHelper";
 import { setCategoryId } from "../redux/slices/filterSlice";
+
+const listCategories = [
+  { name: "популярности", sortProperty: "rating" },
+  { name: " ценапо возрастанию", sortProperty: "-price" },
+  { name: "цена по убыванию", sortProperty: "price" },
+];
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -47,11 +52,12 @@ export const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = listCategories.find((obj) => obj.sortProperty === params.sortType);
+      const sortType = listCategories.find((obj) => obj.sortProperty === params.sortType);
+
       dispatch(
         setFilters({
           ...params,
-          sort,
+          sortType,
         }),
       );
       isSearch.current = true;
@@ -90,7 +96,7 @@ export const Home: React.FC = () => {
           categories={categories}
           categoryesId={categoryesId}
         />
-        <Sort sortType={sortType} />
+        <Sort sortType={sortType} listCategories={listCategories} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (

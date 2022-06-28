@@ -1,26 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setSortType } from "../redux/slices/filterSlice";
-
-export type CategoriesType = {
-  name: string;
-  sortProperty: string;
-};
+import { CategoriesType, setSortType } from "../redux/slices/filterSlice";
 
 type Props = {
   sortType: {
     name: string;
     sortProperty: string;
   };
+  listCategories: {
+    name: string;
+    sortProperty: string;
+  }[];
 };
 
-export const listCategories: CategoriesType[] = [
-  { name: "популярности", sortProperty: "rating" },
-  { name: " ценапо возрастанию", sortProperty: "-price" },
-  { name: "цена по убыванию", sortProperty: "price" },
-];
-
-export const Sort: React.FC<Props> = ({ sortType }) => {
+export const Sort: React.FC<Props> = ({ sortType, listCategories }) => {
   const dispatch = useDispatch();
 
   const sortRef = React.useRef<HTMLDivElement>(null);
