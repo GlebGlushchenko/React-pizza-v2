@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../api/api";
 
 export const fetchPizzas = createAsyncThunk("fetchPizzas/fetchPizzasStatus", async (params) => {
-  const { pageCount, categories, sort, order, search } = params;
-  return api.getPizzas({ pageCount, categories, sort, order, search });
+  const { pageCount, categorie, sort, order, search } = params;
+  return api.getPizzas({ pageCount, categorie, sort, order, search });
 });
 
 export const fetchFullPizza = createAsyncThunk(

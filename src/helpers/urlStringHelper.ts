@@ -10,7 +10,7 @@ export const urlString = {
   order(sortType: CategoriesType) {
     return `&order=${sortType.sortProperty.includes("-") ? "asc" : "desc"}`; // Order
   },
-  categories(selectedCategorie: number) {
+  categorie(selectedCategorie: number) {
     return selectedCategorie > 0 ? `category=${selectedCategorie}` : ""; // Filter
   },
 };

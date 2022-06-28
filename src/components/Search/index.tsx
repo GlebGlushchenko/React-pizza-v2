@@ -5,28 +5,29 @@ import debounce from "lodash.debounce";
 
 import { selectSearchValue, setSearchValue } from "../../redux/slices/searchSlice";
 
-export const Search = () => {
-  const [inputValue, setInputValue] = React.useState("");
+export const Search: React.FC = () => {
+  const [inputValue, setInputValue] = React.useState<string>("");
   const dispatch = useDispatch();
   const searchValue = useSelector(selectSearchValue);
-  const input = React.useRef();
+  const input = React.useRef<HTMLInputElement>(null);
 
   const hanlderUpdateSearchValue = React.useCallback(
-    debounce((e) => {
+    debounce((e: string) => {
       dispatch(setSearchValue(e));
     }, 250),
     [searchValue],
   );
 
-  const handlerChangeInput = (e) => {
-    setInputValue(e);
-    hanlderUpdateSearchValue(e);
+  const handlerChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    hanlderUpdateSearchValue(e.target.value);
   };
 
   const handlerClearInput = () => {
     setInputValue("");
     dispatch(setSearchValue(""));
-    input.current.focus();
+
+    input.current?.focus();
   };
 
   return (
@@ -68,7 +69,7 @@ export const Search = () => {
         ref={input}
         value={inputValue}
         onChange={(e) => {
-          handlerChangeInput(e.target.value);
+          handlerChangeInput(e);
         }}
         type="text"
         placeholder="Поиск пицц"

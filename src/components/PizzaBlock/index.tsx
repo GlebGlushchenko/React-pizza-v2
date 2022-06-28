@@ -4,20 +4,20 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { Link } from "react-router-dom";
 import { plusProduct, selectCartItem } from "../../redux/slices/cartSlice";
 
-type PizzaBlockTypes={
-  vegan:boolean,
-  description:string,
-  weight:any,
-  imgUrl:string,
-  title:string,
-  types:[string],
-  doughType:[string],
-  sizePizza:[number],
-  price:number,
-  id:string,
-}
+export type PizzaBlockTypes = {
+  vegan: boolean;
+  description: string;
+  weight: number[];
+  imgUrl: string;
+  title: string;
+  types: [string];
+  doughType: [string];
+  sizePizza: [number];
+  price: number;
+  id: string;
+};
 
-export const PizzaBlock :React.FC<PizzaBlockTypes> = ({
+export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
   vegan,
   description,
   weight,
@@ -29,14 +29,13 @@ export const PizzaBlock :React.FC<PizzaBlockTypes> = ({
   price,
   id,
 }) => {
-
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItem(id));
   const count = cartItem ? cartItem.count : 0;
-  const [activeSize, setActiveSize] = React.useState(0);
-  const [activeType, setActiveType] = React.useState(0);
-  const [showDescriptions, setShowDescriptions] = React.useState(false);
-  const [weights, setWeight] = React.useState(330);
+  const [activeSize, setActiveSize] = React.useState<number>(0);
+  const [activeType, setActiveType] = React.useState<number>(0);
+  const [showDescriptions, setShowDescriptions] = React.useState<boolean>(false);
+  const [weights, setWeight] = React.useState<number>(330);
 
   const onClickAdd = () => {
     const item = {
@@ -50,14 +49,13 @@ export const PizzaBlock :React.FC<PizzaBlockTypes> = ({
     dispatch(plusProduct(item));
   };
 
-  const handlerActiveIndexSize = (index: number, e:any) => {
-    let size = e.target.innerText.slice(0, 2);
-    setWeight(weight[size]);
+  const handlerActiveIndexSize = (index: number, e: React.MouseEvent<HTMLLIElement>) => {
+    setWeight(weight[index]);
 
     setActiveSize(index);
   };
 
-  const handlerActiveIndexDough = (index:number) => setActiveType(index);
+  const handlerActiveIndexDough = (index: number) => setActiveType(index);
 
   const descriptorCut = description.length > 70 ? description.slice(0, 65) + "..." : description;
 

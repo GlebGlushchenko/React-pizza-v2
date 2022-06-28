@@ -1,18 +1,20 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId } from "../redux/slices/filterSlice";
 
-export const Categories = () => {
-  const { categories, categoryesId } = useSelector((state:any) => state.filter);
-  const dispatch = useDispatch();
-  const handlerSelectCategory = (index:number) => {
-    dispatch(setCategoryId(index));
-  };
+type CategoriesPropsType = {
+  categories: [string];
+  categoryesId: number;
+  handlerSelectCategory: (index: number) => void;
+};
 
+export const Categories: React.FC<CategoriesPropsType> = ({
+  handlerSelectCategory,
+  categories,
+  categoryesId,
+}) => {
   return (
     <div className="categories">
       <ul>
-        {categories.map((item:string, index:number) => (
+        {categories.map((item: string, index: number) => (
           <li
             onClick={() => handlerSelectCategory(index)}
             className={categoryesId === index ? "active" : ""}

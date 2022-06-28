@@ -5,7 +5,7 @@ import { setPageCount } from "../../redux/slices/filterSlice";
 
 import styles from "./Paginate.module.scss";
 
-export const Paginate :React.FC = () => {
+export const Paginate: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <ReactPaginate
@@ -18,7 +18,6 @@ export const Paginate :React.FC = () => {
       pageRangeDisplayed={8}
       pageCount={2}
       previousLabel="<"
-      
     />
   );
 };
