@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 import Header from "../components/Header";
 
-export const Main = () => {
+export const Main:React.FC = () => {
   return (
     <div className={"wrapper"}>
       <Header />

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSortType } from "../redux/slices/filterSlice";
 
-type CategoriesType ={ 
+export type CategoriesType ={ 
   name:string;
   sortProperty:string;
 }

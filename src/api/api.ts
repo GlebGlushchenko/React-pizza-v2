@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import axios from "axios";
 
 const url = `https://62a30a6421232ff9b2169b1b.mockapi.io/items`;

@@ -4,7 +4,20 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { Link } from "react-router-dom";
 import { plusProduct, selectCartItem } from "../../redux/slices/cartSlice";
 
-export const PizzaBlock = ({
+type PizzaBlockTypes={
+  vegan:boolean,
+  description:string,
+  weight:any,
+  imgUrl:string,
+  title:string,
+  types:[string],
+  doughType:[string],
+  sizePizza:[number],
+  price:number,
+  id:string,
+}
+
+export const PizzaBlock :React.FC<PizzaBlockTypes> = ({
   vegan,
   description,
   weight,
@@ -16,6 +29,7 @@ export const PizzaBlock = ({
   price,
   id,
 }) => {
+
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItem(id));
   const count = cartItem ? cartItem.count : 0;
@@ -36,14 +50,14 @@ export const PizzaBlock = ({
     dispatch(plusProduct(item));
   };
 
-  const handlerActiveIndexSize = (index, e) => {
+  const handlerActiveIndexSize = (index: number, e:any) => {
     let size = e.target.innerText.slice(0, 2);
     setWeight(weight[size]);
 
     setActiveSize(index);
   };
 
-  const handlerActiveIndexDough = (index) => setActiveType(index);
+  const handlerActiveIndexDough = (index:number) => setActiveType(index);
 
   const descriptorCut = description.length > 70 ? description.slice(0, 65) + "..." : description;
 
@@ -78,7 +92,7 @@ export const PizzaBlock = ({
                   onClick={() => handlerActiveIndexDough(index)}
                   key={index}
                   className={activeType === index ? "active" : ""}>
-                  {doughType[i]}
+                  {doughType[index]}
                 </li>
               );
             })}
