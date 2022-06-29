@@ -6,11 +6,11 @@ import logo from "../assets/img/pizza-logo.png";
 import Search from "./Search";
 import { selectCart } from "../redux/slices/cartSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const { pathname } = useLocation();
   const { items, totalPrice } = useSelector(selectCart);
 
-  const totalCount:number = items.reduce((sum:number, item:any) => {
+  const totalCount: number = items.reduce((sum: number, item) => {
     return sum + item.count;
   }, 0);
   return (

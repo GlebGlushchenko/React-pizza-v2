@@ -10,21 +10,16 @@ import Categories from "../components/Categories";
 import PizzaBlock, { PizzaBlockTypes } from "../components/PizzaBlock";
 import Sort from "../components/Sort";
 import Paginate from "../components/Paginate";
-import { setFilters } from "../redux/slices/filterSlice";
+import { CategoriesType, setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
 import { selectSearchValue } from "../redux/slices/searchSlice";
 import { urlString } from "../helpers/urlStringHelper";
 import { setCategoryId } from "../redux/slices/filterSlice";
-
-const listCategories = [
-  { name: "популярности", sortProperty: "rating" },
-  { name: " ценапо возрастанию", sortProperty: "-price" },
-  { name: "цена по убыванию", sortProperty: "price" },
-];
+import { RootState, useAppDispatch } from "../redux/store";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handlerSelectCategory = (index: number) => {
     dispatch(setCategoryId(index));
@@ -33,8 +28,8 @@ export const Home: React.FC = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categories, sortType, pageCount, categoryesId } = useSelector(
-    (state: any) => state.filter,
+  const { categories, sortType, pageCount, categoryesId, listCategories } = useSelector(
+    (state: RootState) => state.filter,
   );
   const searchValue = useSelector(selectSearchValue);
 
@@ -45,14 +40,16 @@ export const Home: React.FC = () => {
     const sort = urlString.sort(sortType);
     const order = urlString.order(sortType);
     const categorie = urlString.categorie(categoryesId);
-    // @ts-ignore
+
     dispatch(fetchPizzas({ pageCount, categorie, sort, order, search }));
   };
 
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sortType = listCategories.find((obj) => obj.sortProperty === params.sortType);
+      const sortType = listCategories.find(
+        (obj: CategoriesType) => obj.sortProperty === params.sortType,
+      );
 
       dispatch(
         setFilters({
@@ -63,7 +60,7 @@ export const Home: React.FC = () => {
       isSearch.current = true;
     }
     window.scrollTo(0, 0);
-  }, []);
+  }, [listCategories, dispatch]);
 
   React.useEffect(() => {
     if (!isSearch.current) {
@@ -83,7 +80,7 @@ export const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryesId, sortType, searchValue, pageCount]);
+  }, [categoryesId, sortType, searchValue, pageCount, navigate]);
 
   const skeleton = [...new Array(8)].map((item, index) => <Skeliton key={index} />); //Render skeleton
   const items = pizzas.map((item: PizzaBlockTypes) => <PizzaBlock {...item} key={item.id} />); //Render pizzas

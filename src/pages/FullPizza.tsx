@@ -7,7 +7,7 @@ import { fetchFullPizza } from "../redux/slices/pizzaSlice";
 export const FullPizza: React.FC = () => {
   const dispatch = useDispatch<any>();
   const pizza: { title: string; description: string; imgUrl: string } = useSelector(
-    (state: any) => state.pizza.fullpizza,
+    (state) => state.pizza.fullpizza,
   );
   const { id } = useParams();
 

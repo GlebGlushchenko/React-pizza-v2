@@ -5,11 +5,12 @@ export type CategoriesType = {
   sortProperty: string;
 };
 
-type FilterSliceType = {
+export type FilterSliceType = {
   pageCount: number;
   categoryesId: number;
   sortType: CategoriesType;
   categories: string[];
+  listCategories: CategoriesType[];
 };
 
 const initialState: FilterSliceType = {
@@ -17,6 +18,11 @@ const initialState: FilterSliceType = {
   categoryesId: 0,
   sortType: { name: "популярности⬇", sortProperty: "rating" },
   categories: ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"],
+  listCategories: [
+    { name: "популярности", sortProperty: "rating" },
+    { name: " ценапо возрастанию", sortProperty: "-price" },
+    { name: "цена по убыванию", sortProperty: "price" },
+  ],
 };
 
 export const filterSlice = createSlice({

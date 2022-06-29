@@ -1,7 +1,7 @@
 import React from "react";
 
 type CategoriesPropsType = {
-  categories: [string];
+  categories: string[];
   categoryesId: number;
   handlerSelectCategory: (index: number) => void;
 };
