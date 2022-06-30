@@ -60,7 +60,7 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
           </svg>
         </button>
         <b>{item.count}</b>
-        <div
+        <button
           onClick={handlerPlusItem}
           className="button button--outline button--circle cart__item-count-plus">
           <svg
@@ -78,13 +78,13 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{item.price * item.count} ₽</b>
       </div>
       <div className="cart__item-remove">
-        <div onClick={handlerRemoveItem} className="button button--outline button--circle">
+        <button onClick={handlerRemoveItem} className="button button--outline button--circle">
           <svg
             width="10"
             height="10"
@@ -100,7 +100,7 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );

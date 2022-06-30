@@ -13,14 +13,14 @@ export const fetchPizzas = createAsyncThunk(
   "fetchPizzas/fetchPizzasStatus",
   async (params: ParamsType) => {
     const { pageCount, categorie, sort, order, search } = params;
-    return api.getPizzas({ pageCount, categorie, sort, order, search });
+    return api.getPizzas(pageCount, categorie, sort, order, search);
   },
 );
 
 export const fetchFullPizza = createAsyncThunk(
   "fetchFullPizza/fetchFullPizzaStatus",
-  async (id) => {
-    return api.getFullPizza({ id });
+  async (id: string) => {
+    return api.getFullPizza(id);
   },
 );
 

@@ -165,8 +165,14 @@
 
 .disabled{
   opacity: .2;
+  border-color: rgb(152, 152, 152);
+  svg path {
+    fill:rgb(152, 152, 152); ;
+  }
 
-  
+  &:hover{
+    background: transparent;
+  }
   &:active{
     transform:none
   }

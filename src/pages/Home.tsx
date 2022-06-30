@@ -3,7 +3,7 @@ import React from "react";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Skeliton from "../components/PizzaBlock/Skeliton";
 import Categories from "../components/Categories";
@@ -16,14 +16,15 @@ import { selectSearchValue } from "../redux/slices/searchSlice";
 import { urlString } from "../helpers/urlStringHelper";
 import { setCategoryId } from "../redux/slices/filterSlice";
 import { RootState, useAppDispatch } from "../redux/store";
+import Filters from "../components/Filters/Filters";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handlerSelectCategory = (index: number) => {
+  const handlerSelectCategory = React.useCallback((index: number) => {
     dispatch(setCategoryId(index));
-  };
+  }, []);
 
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -70,31 +71,30 @@ export const Home: React.FC = () => {
     window.scrollTo(0, 0);
   }, [categoryesId, sortType, searchValue, pageCount]);
 
-  React.useEffect(() => {
-    if (isMounted.current) {
-      const queryString = qs.stringify({
-        sortType: sortType.sortProperty,
-        categoryesId,
-        pageCount,
-      });
-      navigate(`?${queryString}`);
-    }
-    isMounted.current = true;
-  }, [categoryesId, sortType, searchValue, pageCount, navigate]);
+  // React.useEffect(() => {
+  //   if (isMounted.current) {
+  //     const queryString = qs.stringify({
+  //       sortType: sortType.sortProperty,
+  //       categoryesId,
+  //       pageCount,
+  //     });
+  //     navigate(`?${queryString}`);
+  //   }
+  //   isMounted.current = true;
+  // }, [categoryesId, sortType, searchValue, pageCount, navigate]);
 
   const skeleton = [...new Array(8)].map((item, index) => <Skeliton key={index} />); //Render skeleton
   const items = pizzas.map((item: PizzaBlockTypes) => <PizzaBlock {...item} key={item.id} />); //Render pizzas
 
   return (
     <>
-      <div className="content__top">
-        <Categories
-          handlerSelectCategory={handlerSelectCategory}
-          categories={categories}
-          categoryesId={categoryesId}
-        />
-        <Sort sortType={sortType} listCategories={listCategories} />
-      </div>
+      <Filters
+        handlerSelectCategory={handlerSelectCategory}
+        categories={categories}
+        categoryesId={categoryesId}
+        sortType={sortType}
+        listCategories={listCategories}
+      />
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (
         <div style={{ textAlign: "center", marginBottom: "100px" }}>
