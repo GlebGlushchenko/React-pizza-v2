@@ -9,10 +9,20 @@ import Logo from "./Logo";
 const Header: React.FC = () => {
   const { pathname } = useLocation();
   const { items, totalPrice } = useSelector(selectCart);
+  const isMounted = React.useRef(false);
 
   const totalCount: number = items.reduce((sum, item) => {
     return sum + item.count;
   }, 0);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      window.localStorage.setItem("cart", json);
+    }
+
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <header className="header">

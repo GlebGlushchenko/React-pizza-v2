@@ -1,5 +1,4 @@
 import React from "react";
-import { useWhyDidYouUpdate } from "ahooks";
 
 type CategoriesPropsType = {
   categories: string[];
@@ -9,12 +8,6 @@ type CategoriesPropsType = {
 
 export const Categories: React.FC<CategoriesPropsType> = React.memo(
   ({ handlerSelectCategory, categories, categoryesId }) => {
-    useWhyDidYouUpdate("Categories", {
-      handlerSelectCategory,
-      categories,
-      categoryesId,
-    });
-
     return (
       <div className="categories">
         <ul>
