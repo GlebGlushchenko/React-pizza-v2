@@ -6,14 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Skeliton from "../components/PizzaBlock/Skeliton";
-import Categories from "../components/Categories";
 import PizzaBlock, { PizzaBlockTypes } from "../components/PizzaBlock";
-import Sort from "../components/Sort";
 import Paginate from "../components/Paginate";
 import { CategoriesType, setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
 import { selectSearchValue } from "../redux/slices/searchSlice";
-import { urlString } from "../helpers/urlStringHelper";
+import { urlString } from "../utils/urlStringHelper";
 import { setCategoryId } from "../redux/slices/filterSlice";
 import { RootState, useAppDispatch } from "../redux/store";
 import Filters from "../components/Filters/Filters";
