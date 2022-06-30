@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { clearCart, selectCart } from "../redux/slices/cartSlice";
 
 import CartItem from "../components/CartItem";
 import CartEmpty from "./CartEmpty";
+import { selectCart } from "../redux/slices/cart/selector";
+import { clearCart } from "../redux/slices/cart/slice";
 
 type CartItemType = {
   imgUrl: string;

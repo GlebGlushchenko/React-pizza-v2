@@ -2,7 +2,8 @@ import React from "react";
 
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { Link } from "react-router-dom";
-import { plusProduct, selectCartItem } from "../../redux/slices/cartSlice";
+import { selectCartItem } from "../../redux/slices/cart/selector";
+import { plusProduct } from "../../redux/slices/cart/slice";
 
 export type PizzaBlockTypes = {
   vegan: boolean;

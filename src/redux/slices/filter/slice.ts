@@ -1,17 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export type CategoriesType = {
-  name: string;
-  sortProperty: string;
-};
-
-export type FilterSliceType = {
-  pageCount: number;
-  categoryesId: number;
-  sortType: CategoriesType;
-  categories: string[];
-  listCategories: CategoriesType[];
-};
+import { CategoriesType, FilterSliceType } from "./type";
 
 const initialState: FilterSliceType = {
   pageCount: 1,

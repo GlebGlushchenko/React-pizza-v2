@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoriesType } from "../../redux/slices/filterSlice";
+import { CategoriesType } from "../../redux/slices/filter/type";
 import Categories from "../Categories";
 import Sort from "../Sort";
 

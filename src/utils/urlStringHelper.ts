@@ -1,4 +1,4 @@
-import { CategoriesType } from "../redux/slices/filterSlice";
+import { CategoriesType } from "../redux/slices/filter/type";
 
 export const urlString = {
   sort(sortType: CategoriesType) {

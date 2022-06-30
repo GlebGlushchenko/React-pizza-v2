@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { plusProduct, removeProduct, minusProduct } from "../redux/slices/cartSlice";
+import { minusProduct, plusProduct, removeProduct } from "../redux/slices/cart/slice";
 
 export type CartItemType = {
   item: {

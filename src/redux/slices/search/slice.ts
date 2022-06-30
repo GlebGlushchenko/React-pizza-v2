@@ -1,9 +1,5 @@
-import { RootState } from "./../store";
 import { createSlice } from "@reduxjs/toolkit";
-
-type SearchSliceType = {
-  searchValue: string;
-};
+import { SearchSliceType } from "./type";
 
 const initialState: SearchSliceType = {
   searchValue: "",
@@ -18,10 +14,6 @@ export const searchSlice = createSlice({
     },
   },
 });
-
-//SELECTORS
-export const selectSearchValue = (state: RootState) => state.search.searchValue;
-//==================================================//
 
 export const { setSearchValue } = searchSlice.actions;
 

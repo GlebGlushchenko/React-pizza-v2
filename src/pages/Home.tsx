@@ -8,13 +8,13 @@ import { useSelector } from "react-redux";
 import Skeliton from "../components/PizzaBlock/Skeliton";
 import PizzaBlock, { PizzaBlockTypes } from "../components/PizzaBlock";
 import Paginate from "../components/Paginate";
-import { CategoriesType, setFilters } from "../redux/slices/filterSlice";
-import { fetchPizzas } from "../redux/slices/pizzaSlice";
-import { selectSearchValue } from "../redux/slices/searchSlice";
 import { urlString } from "../utils/urlStringHelper";
-import { setCategoryId } from "../redux/slices/filterSlice";
 import { RootState, useAppDispatch } from "../redux/store";
 import Filters from "../components/Filters/Filters";
+import { setCategoryId, setFilters } from "../redux/slices/filter/slice";
+import { CategoriesType } from "../redux/slices/filter/type";
+import { fetchPizzas } from "../redux/slices/pizza/slice";
+import { selectSearchValue } from "../redux/slices/search/selector";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();

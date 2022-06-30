@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { api } from "../../api/api";
-
-type ParamsType = {
-  categorie: string;
-  order: string;
-  pageCount: number;
-  search: string;
-  sort: string;
-};
+import { api } from "../../../api/api";
+import { CartItemType, ParamsType, PizzaSliceType } from "./type";
 
 export const fetchPizzas = createAsyncThunk(
   "fetchPizzas/fetchPizzasStatus",
@@ -24,27 +17,9 @@ export const fetchFullPizza = createAsyncThunk(
   },
 );
 
-export type CartItemType = {
-  id: string;
-  description: string;
-  title: string;
-  price: number;
-  imgUrl: string;
-  vegan: boolean;
-  sizePIzza: number[];
-  doughType: string[];
-  types: number[];
-};
-
-type PizzaSliceType = {
-  pizzas: CartItemType[];
-  fullpizza: {};
-  status: string;
-};
-
 const initialState: PizzaSliceType = {
   pizzas: [],
-  fullpizza: {},
+  fullpizza: {} as CartItemType,
   status: "loading",
 };
 

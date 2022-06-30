@@ -1,25 +1,24 @@
-// @ts-nocheck
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchFullPizza } from "../redux/slices/pizzaSlice";
+import { fullPizzaSelector } from "../redux/slices/pizza/selector";
+import { fetchFullPizza } from "../redux/slices/pizza/slice";
 
 export const FullPizza: React.FC = () => {
   const dispatch = useDispatch<any>();
-  const pizza: { title: string; description: string; imgUrl: string } = useSelector(
-    (state) => state.pizza.fullpizza,
-  );
+  const { title, description, imgUrl } = useSelector(fullPizzaSelector);
+
   const { id } = useParams();
 
   React.useEffect(() => {
-    dispatch(fetchFullPizza(id));
+    dispatch(fetchFullPizza(id ? id : ""));
   }, []);
 
   return (
     <div className="container">
-      <h2>{pizza.title}</h2>
-      <img src={pizza.imgUrl} alt="" />
-      <div>{pizza.description}</div>
+      <h2>{title}</h2>
+      <img src={imgUrl} alt="" />
+      <div>{description}</div>
     </div>
   );
 };

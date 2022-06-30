@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { CategoriesType, setSortType } from "../redux/slices/filterSlice";
+import { setSortType } from "../redux/slices/filter/slice";
+import { CategoriesType } from "../redux/slices/filter/type";
 
 type Props = {
   sortType: {

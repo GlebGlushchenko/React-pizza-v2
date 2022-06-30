@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./Search.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
-
-import { selectSearchValue, setSearchValue } from "../../redux/slices/searchSlice";
+import { selectSearchValue } from "../../redux/slices/search/selector";
+import { setSearchValue } from "../../redux/slices/search/slice";
 
 export const Search: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>("");

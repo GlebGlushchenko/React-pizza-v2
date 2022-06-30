@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux/es/exports";
 
 import Search from "./Search";
-import { selectCart } from "../redux/slices/cartSlice";
 import Logo from "./Logo";
+import { selectCart } from "../redux/slices/cart/selector";
 
 const Header: React.FC = () => {
   const { pathname } = useLocation();
