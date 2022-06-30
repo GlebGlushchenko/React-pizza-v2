@@ -1,9 +1,9 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const Skeliton = (props:{}) => {
+const Skeliton = (props: {}) => {
   return (
-    <div className="skeliton-container">
+    <div className="pizza-block__wrapper">
       <ContentLoader
         speed={2}
         width={280}

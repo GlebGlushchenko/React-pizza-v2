@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Skeliton from "../components/PizzaBlock/Skeliton";
-import PizzaBlock, { PizzaBlockTypes } from "../components/PizzaBlock";
+import PizzaBlock from "../components/PizzaBlock";
 import Paginate from "../components/Paginate";
 import { urlString } from "../utils/urlStringHelper";
 import { RootState, useAppDispatch } from "../redux/store";
@@ -15,6 +15,7 @@ import { setCategoryId, setFilters } from "../redux/slices/filter/slice";
 import { CategoriesType } from "../redux/slices/filter/type";
 import { fetchPizzas } from "../redux/slices/pizza/slice";
 import { selectSearchValue } from "../redux/slices/search/selector";
+import { PizzaBlockTypes } from "../redux/slices/pizza/type";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -69,17 +70,17 @@ export const Home: React.FC = () => {
     window.scrollTo(0, 0);
   }, [categoryesId, sortType, searchValue, pageCount]);
 
-  // React.useEffect(() => {
-  //   if (isMounted.current) {
-  //     const queryString = qs.stringify({
-  //       sortType: sortType.sortProperty,
-  //       categoryesId,
-  //       pageCount,
-  //     });
-  //     navigate(`?${queryString}`);
-  //   }
-  //   isMounted.current = true;
-  // }, [categoryesId, sortType, searchValue, pageCount, navigate]);
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType: sortType.sortProperty,
+        categoryesId,
+        pageCount,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryesId, sortType, searchValue, pageCount, navigate]);
 
   const skeleton = [...new Array(8)].map((item, index) => <Skeliton key={index} />); //Render skeleton
   const items = pizzas.map((item: PizzaBlockTypes) => <PizzaBlock {...item} key={item.id} />); //Render pizzas

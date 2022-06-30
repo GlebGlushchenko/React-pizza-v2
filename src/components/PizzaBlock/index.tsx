@@ -4,19 +4,7 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { Link } from "react-router-dom";
 import { selectCartItem } from "../../redux/slices/cart/selector";
 import { plusProduct } from "../../redux/slices/cart/slice";
-
-export type PizzaBlockTypes = {
-  vegan: boolean;
-  description: string;
-  weight: number[];
-  imgUrl: string;
-  title: string;
-  types: [string];
-  doughType: [string];
-  sizePizza: [number];
-  price: number;
-  id: string;
-};
+import { PizzaBlockTypes } from "../../redux/slices/pizza/type";
 
 export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
   vegan,

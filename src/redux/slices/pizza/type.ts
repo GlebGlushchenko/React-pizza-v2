@@ -22,3 +22,16 @@ export interface PizzaSliceType {
   fullpizza: CartItemType;
   status: string;
 }
+
+export type PizzaBlockTypes = {
+  vegan: boolean;
+  description: string;
+  weight: number[];
+  imgUrl: string;
+  title: string;
+  types: [string];
+  doughType: [string];
+  sizePizza: [number];
+  price: number;
+  id: string;
+};

@@ -6,8 +6,9 @@ import { selectSearchValue } from "../../redux/slices/search/selector";
 import { setSearchValue } from "../../redux/slices/search/slice";
 
 export const Search: React.FC = () => {
-  const [inputValue, setInputValue] = React.useState<string>("");
   const dispatch = useDispatch();
+
+  const [inputValue, setInputValue] = React.useState<string>("");
   const searchValue = useSelector(selectSearchValue);
   const input = React.useRef<HTMLInputElement>(null);
 
