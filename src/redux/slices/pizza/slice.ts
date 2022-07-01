@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import { CartItemType, ParamsType, PizzaSliceType } from "./type";
 
@@ -26,11 +27,7 @@ const initialState: PizzaSliceType = {
 export const pizzaSlice = createSlice({
   name: "pizza",
   initialState,
-  reducers: {
-    setPizzas(state, action: PayloadAction<CartItemType[]>) {
-      state.pizzas = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
       state.pizzas = [];
@@ -47,9 +44,12 @@ export const pizzaSlice = createSlice({
     builder.addCase(fetchFullPizza.fulfilled, (state, action) => {
       state.fullpizza = action.payload;
     });
+    builder.addCase(fetchFullPizza.rejected, (state, action) => {
+      state.status = "error";
+    });
   },
 });
 
-export const { setPizzas } = pizzaSlice.actions;
+export const {} = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

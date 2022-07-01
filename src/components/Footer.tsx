@@ -1,6 +1,6 @@
 import React from "react";
-
-export const Footer:React.FC = () => {
+const arr: any = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+export const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer__icon">

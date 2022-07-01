@@ -6,15 +6,16 @@ export type ParamsType = {
   sort: string;
 };
 export interface CartItemType {
-  id: string;
-  description: string;
-  title: string;
-  price: number;
-  imgUrl: string;
   vegan: boolean;
-  sizePIzza: number[];
+  description: string;
+  weight: number[];
+  imgUrl: string;
+  title: string;
+  types: string[];
   doughType: string[];
-  types: number[];
+  sizePizza: number[];
+  price: number;
+  id: string;
 }
 
 export interface PizzaSliceType {
@@ -23,15 +24,30 @@ export interface PizzaSliceType {
   status: string;
 }
 
-export type PizzaBlockTypes = {
+export interface PizzaBlockTypes {
   vegan: boolean;
   description: string;
   weight: number[];
   imgUrl: string;
   title: string;
-  types: [string];
-  doughType: [string];
-  sizePizza: [number];
+  types: string[];
+  doughType: string[];
+  sizePizza: number[];
   price: number;
   id: string;
-};
+}
+
+export interface PizzaBlockProps {
+  obj: {
+    vegan: boolean;
+    description: string;
+    weight: number[];
+    imgUrl: string;
+    title: string;
+    types: string[];
+    doughType: string[];
+    sizePizza: number[];
+    price: number;
+    id: string;
+  };
+}

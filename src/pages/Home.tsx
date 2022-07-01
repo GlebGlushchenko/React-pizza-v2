@@ -15,7 +15,7 @@ import { setCategoryId, setFilters } from "../redux/slices/filter/slice";
 import { CategoriesType } from "../redux/slices/filter/type";
 import { fetchPizzas } from "../redux/slices/pizza/slice";
 import { selectSearchValue } from "../redux/slices/search/selector";
-import { PizzaBlockTypes } from "../redux/slices/pizza/type";
+import ErrorSearch from "../components/NotFoundBlock/ErrorSearch";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
   );
   const searchValue = useSelector(selectSearchValue);
 
-  const { pizzas, status } = useSelector((state: any) => state.pizza); //Pizza
+  const { pizzas, status } = useSelector((state: RootState) => state.pizza); //Pizza
 
   const getPizzas = async () => {
     const search = urlString.search(searchValue);
@@ -81,9 +81,8 @@ export const Home: React.FC = () => {
     }
     isMounted.current = true;
   }, [categoryesId, sortType, searchValue, pageCount, navigate]);
-
   const skeleton = [...new Array(8)].map((item, index) => <Skeliton key={index} />); //Render skeleton
-  const items = pizzas.map((item: PizzaBlockTypes) => <PizzaBlock {...item} key={item.id} />); //Render pizzas
+  const items = pizzas.map((item) => <PizzaBlock obj={item} key={item.id} />); //Render pizzas
 
   return (
     <>
@@ -96,10 +95,7 @@ export const Home: React.FC = () => {
       />
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (
-        <div style={{ textAlign: "center", marginBottom: "100px" }}>
-          <h2>Нечего не найдено 😕</h2>
-          <p>К сожелению что то пошло не так</p>
-        </div>
+        <ErrorSearch />
       ) : (
         <div className="content__items">{status === "loading" ? skeleton : items}</div>
       )}

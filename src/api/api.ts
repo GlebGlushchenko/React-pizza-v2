@@ -17,6 +17,7 @@ export const api = {
   },
   async getFullPizza(id: string) {
     const { data } = await axios.get(url + "/" + id);
+
     return data;
   },
 };

@@ -1,0 +1,22 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title{
+  margin-bottom: 30px;
+}
+
+.img{
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 30px;
+
+}
+
+.disc{
+  margin-bottom: 30px;
+  text-align: center;
+}

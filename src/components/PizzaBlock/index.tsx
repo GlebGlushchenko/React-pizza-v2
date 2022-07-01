@@ -4,55 +4,47 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { Link } from "react-router-dom";
 import { selectCartItem } from "../../redux/slices/cart/selector";
 import { plusProduct } from "../../redux/slices/cart/slice";
-import { PizzaBlockTypes } from "../../redux/slices/pizza/type";
+import { PizzaBlockProps } from "../../redux/slices/pizza/type";
 
-export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
-  vegan,
-  description,
-  weight,
-  imgUrl,
-  title,
-  types,
-  doughType,
-  sizePizza,
-  price,
-  id,
-}) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ obj }) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector(selectCartItem(id));
+  const cartItem = useSelector(selectCartItem(obj.id));
   const count = cartItem ? cartItem.count : 0;
+
   const [activeSize, setActiveSize] = React.useState<number>(0);
   const [activeType, setActiveType] = React.useState<number>(0);
+
   const [showDescriptions, setShowDescriptions] = React.useState<boolean>(false);
   const [weights, setWeight] = React.useState<number>(330);
 
   const onClickAdd = () => {
     const item = {
-      id,
-      title,
-      price,
-      imgUrl,
-      type: doughType[activeType],
-      size: sizePizza[activeSize],
+      id: obj.id,
+      title: obj.title,
+      price: obj.price,
+      imgUrl: obj.imgUrl,
+      type: obj.doughType[activeType],
+      size: obj.sizePizza[activeSize],
       count: 0,
     };
     dispatch(plusProduct(item));
   };
 
   const handlerActiveIndexSize = (index: number, e: React.MouseEvent<HTMLLIElement>) => {
-    setWeight(weight[index]);
+    setWeight(obj.weight[index]);
 
     setActiveSize(index);
   };
 
   const handlerActiveIndexDough = (index: number) => setActiveType(index);
 
-  const descriptorCut = description.length > 70 ? description.slice(0, 65) + "..." : description;
+  const descriptorCut =
+    obj.description.length > 70 ? obj.description.slice(0, 65) + "..." : obj.description;
 
   return (
     <div className="pizza-block__wrapper">
       <div className="pizza-block">
-        {vegan && (
+        {obj.vegan && (
           <span className="pizza-block__veganIcon">
             <img
               src="https://tick-time.ru/images/filters/4b8e14c0-3933-485a-85e4-e971c44c99f9.png"
@@ -64,29 +56,29 @@ export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
             />
           </span>
         )}
-        <Link to={"pizza/" + id}>
-          <img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+        <Link to={"pizza/" + obj.id}>
+          <img className="pizza-block__image" src={obj.imgUrl} alt="Pizza" />
         </Link>
 
-        <h4 className="pizza-block__title">{title}</h4>
+        <h4 className="pizza-block__title">{obj.title}</h4>
         <div className="pizza-block__disc" onClick={() => setShowDescriptions(!showDescriptions)}>
-          {!showDescriptions ? descriptorCut : description}
+          {!showDescriptions ? descriptorCut : obj.description}
         </div>
         <div className="pizza-block__selector">
           <ul>
-            {types.map((i, index) => {
+            {obj.types.map((i, index) => {
               return (
                 <li
                   onClick={() => handlerActiveIndexDough(index)}
                   key={index}
                   className={activeType === index ? "active" : ""}>
-                  {doughType[index]}
+                  {obj.doughType[index]}
                 </li>
               );
             })}
           </ul>
           <ul>
-            {sizePizza.map((item, index) => {
+            {obj.sizePizza.map((item, index) => {
               return (
                 <li
                   className={activeSize === index ? "active" : ""}
@@ -100,7 +92,7 @@ export const PizzaBlock: React.FC<PizzaBlockTypes> = ({
         </div>
 
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price"> {price} ₽</div>
+          <div className="pizza-block__price"> {obj.price} ₽</div>
           <div className="pizza-block__weight">Вес: {weights} гр.</div>
 
           <button onClick={onClickAdd} className="button button--outline button--add">
