@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
-import { CartItemType, ParamsType, PizzaSliceType } from "./type";
+import { CartItemType, ParamsType, PizzaBlockTypes, PizzaSliceType } from "./type";
 
 export const fetchPizzas = createAsyncThunk(
   "fetchPizzas/fetchPizzasStatus",
